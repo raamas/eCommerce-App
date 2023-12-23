@@ -6,10 +6,11 @@ import {
 
 export default function Root() {
     return (
-        <RecoilRoot>
-            <div >
+        <div >
+            <h1>God this is hard</h1>
+            <RecoilRoot>
                 <Outlet />
-            </div>
-        </RecoilRoot>
+            </RecoilRoot>
+        </div>
     )
 }
