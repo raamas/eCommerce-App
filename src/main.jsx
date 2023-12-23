@@ -8,7 +8,6 @@ import {
 import Root from './routes/Root.jsx'
 import Login from './routes/Login.jsx'
 import Home from './routes/Home.jsx'
-import User, { userLoader } from './routes/User.jsx'
 import Checkout from './routes/Checkout.jsx'
 
 
