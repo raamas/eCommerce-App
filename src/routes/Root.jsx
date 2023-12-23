@@ -7,8 +7,6 @@ import {
 export default function Root() {
     return (
         <div >
-            <h1>God this is hard</h1>
-            <Link to='/home'>Home</Link>
             <RecoilRoot>
                 <Outlet />
             </RecoilRoot>
