@@ -16,7 +16,7 @@ function Home() {
     return (
         <div className='flex flex-col items-center justify-center'>
             <Header>
-                {(user.fullname) ? <Link to={'/user/'} >{user.fullname}</Link> : <Link to='/login'>Log In</Link>}
+                {(user.fullname) ? <p className='mx-1'>{user.username}</p> : <Link to='/login'>Log In</Link>}
             </Header>
 
             <div className="hero bg-base-300 min-h-[70vh] mb-8">

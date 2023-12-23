@@ -24,10 +24,6 @@ const router = createBrowserRouter([
         path:'/home',
         element:<Home />
       }, {
-        path:'/user/:userId',
-        element:<User/>,
-        loader: userLoader,
-      }, {
         path:'/checkout',
         element:<Checkout/>
       }, 

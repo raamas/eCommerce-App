@@ -7,14 +7,16 @@ import { shoppingCartState } from '../routes/Home'
 function Product({ product }) {
     const [cart, setCart] = useRecoilState(shoppingCartState)
     const user = useRecoilValue(userState)
-
+    
+    
     const addProductToCart = (e)=>{
         setCart([...cart, product])
         e.target.innerText = 'Añadido al carrito!'
         e.target.disabled = true
+        console.log(cart)
     }
     return (
-        <div className="card shadow-md m-2 w-full">
+        <div className="card card-bordered shadow-sm m-2 w-full">
             <div className="card-body">
                 <h3 className="card-title">{product.title}</h3>
                 <p>{product.description}</p>

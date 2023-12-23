@@ -25,8 +25,9 @@ function Login() {
 
         if (!data) {
             console.log(error.stack)
+            navigate('/login')
         }
-
+        
         setActiveUser(data)
         navigate('/home')
     }
