@@ -9,9 +9,7 @@ export default function Root() {
     const user = useRecoilValue(userState)
     return (
         <div >
-            <RecoilRoot>
-                { (user.id) ? <Outlet></Outlet> : <Navigate to='/home'/> }
-            </RecoilRoot>
+            {(user.id) ? <Outlet></Outlet> : <Navigate to='/home' />}
         </div>
     )
 }
