@@ -5,11 +5,13 @@ import {
   createBrowserRouter,
   RouterProvider
 } from 'react-router-dom'
+import { RecoilRoot } from 'recoil'
 import Root from './routes/Root.jsx'
 import Login from './routes/Login.jsx'
 import Home from './routes/Home.jsx'
 import Checkout from './routes/Checkout.jsx'
-import { RecoilRoot } from 'recoil'
+import ProductPage from './routes/ProductPage.jsx'
+import { loader as productLoader } from './routes/ProductPage.jsx'
 
 
 const router = createBrowserRouter([
@@ -27,7 +29,12 @@ const router = createBrowserRouter([
       }, {
         path: '/checkout',
         element: <Checkout />
-      },
+      },{
+        path:'/products/:productId',
+        element: <ProductPage />,
+        loader: productLoader
+      }
+
     ]
   },
 ])

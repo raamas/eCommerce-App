@@ -11,7 +11,6 @@ export default function Root() {
         <div >
 
                 <Outlet />
-                {/* { (user.id == undefined || user.id == null) && <Navigate to='/login'></Navigate> } */}
         </div>
     )
 }
