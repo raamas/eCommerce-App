@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRecoilState } from 'recoil'
-import { shoppingCartState } from './Home'
-import Header from '../components/Header'
+import { shoppingCartState } from './Home.jsx'
+import Header from '../components/Header.jsx'
 
 function Checkout() {
   const [cart, setCart] = useRecoilState(shoppingCartState)
@@ -9,7 +9,6 @@ function Checkout() {
   cart.forEach((product) => {
     cartTotal += product.price
   })
-  console.log(cartTotal)
 
 
   return (
@@ -20,7 +19,7 @@ function Checkout() {
           <div className="w-4/5 products overflow-y-auto ">
             {cart.map((product) => {
               return (
-                <div className="card card-compact card-bordered w-full mb-4 ">
+                <div key={product.id} className="card card-compact card-bordered w-full mb-4 ">
                   <div className="card-body text-center items-center ">
                     <div className="card-title">{product.title}</div>
                     <p>${product.price}</p>

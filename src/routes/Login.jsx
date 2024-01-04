@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { supabase } from '../supabaseClient'
+import React, { useState } from 'react'
+import { supabase } from '../supabaseClient.js'
 import { useNavigate } from 'react-router-dom'
 import { atom, useRecoilState } from 'recoil'
 
@@ -34,7 +34,6 @@ function Login() {
 
     return (
         <div className='flex flex-col justify-center items-center w-full h-screen '>
-            {/* <p>{activeUser}</p> */}
             {(loading) ? <p>Cargando</p>
                 : <div className="form flex flex-col justify-center items-center w-4/5 p-2">
                     <input className='input input-bordered input-primary mb-2 w-full' type="email" name="email" id="email" placeholder='Escribe tu email' value={query.email} onChange={(e) => setQuery({ ...query, email: e.target.value })} />

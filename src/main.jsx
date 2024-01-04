@@ -12,6 +12,7 @@ import Home from './routes/Home.jsx'
 import Checkout from './routes/Checkout.jsx'
 import ProductPage from './routes/ProductPage.jsx'
 import { loader as productLoader } from './routes/ProductPage.jsx'
+import '@smastrom/react-rating/style.css'
 
 
 const router = createBrowserRouter([

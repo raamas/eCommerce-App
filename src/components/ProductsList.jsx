@@ -1,7 +1,7 @@
 import React from 'react'
-import Product from './Product'
+import Product from './Product.jsx'
 import { atom, useRecoilState } from 'recoil'
-import { supabase } from '../supabaseClient'
+import { supabase } from '../supabaseClient.js'
 import { useEffect } from 'react'
 
 export const productsState = atom({
@@ -33,7 +33,7 @@ function ProductsList() {
     <div className='flex flex-row items-center justify-center flex-wrap p-2'>
         { (products) && 
             products.map((product)=>{
-                return <Product product={product}/>
+                return <Product key={product.id} product={product}/>
             })
         }
     </div>

@@ -1,8 +1,8 @@
 import React from 'react'
 import { useRecoilValue } from 'recoil'
-import { shoppingCartState } from '../routes/Home'
+import { shoppingCartState } from '../routes/Home.jsx'
 import { Link } from 'react-router-dom'
-import { userState } from '../routes/Login'
+import { userState } from '../routes/Login.jsx'
 
 function Header({ children }) {
     const cart = useRecoilValue(shoppingCartState)
@@ -13,6 +13,8 @@ function Header({ children }) {
             <div>
                 <a href="#" className='mx-1'>Search</a>
                 {(user.id) && (cart.length > 0) ? <Link to='/checkout' className='mx-1'>Cart[{cart.length}]</Link> : <p className='mx-1'>Cart[{cart.length}]</p>}
+                {(user.fullname) ? <p className='mx-1'>{user.username}</p> : <Link to='/login'>Log In</Link>}
+
                 {children}
             </div>
         </div>

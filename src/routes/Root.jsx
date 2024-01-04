@@ -1,12 +1,10 @@
 import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
-import {
-    RecoilRoot, useRecoilValue
+import {  Outlet } from 'react-router-dom'
+import { useRecoilValue
 } from 'recoil'
-import { userState } from './Login'
+import { userState } from './Login.jsx'
 
 export default function Root() {
-    const user = useRecoilValue(userState)
     return (
         <div >
 
