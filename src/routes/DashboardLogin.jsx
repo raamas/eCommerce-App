@@ -5,12 +5,12 @@ import { atom, useRecoilState } from 'recoil'
 import { Link } from 'react-router-dom'
 
 export const userState = atom({
-    key:'userState',
+    key: 'userState',
     default: {}
 })
 
 
-function Login() {
+function DashboardLogin() {
     const [query, setQuery] = useState({ email: '', password: '' })
     const [activeUser, setActiveUser] = useRecoilState(userState)
     const [loading, setLoading] = useState(false)
@@ -18,19 +18,28 @@ function Login() {
 
     const loginHandler = async () => {
 
+        console.log(query)
+
+        setLoading(true)
         let { data, error } = await supabase.auth.signInWithPassword({
-            email:query.email,
-            password:query.password
+            email: query.email,
+            password: query.password
         })
 
-         if (!data.user) {
+        console.log(data)
+        console.log(error)
+
+        if (!data.user) {
             console.log(error.stack)
-            navigate('/login')
+            navigate('/dashboard-login')
+            setLoading(false)
         }
         
-        console.log(data)
-        setActiveUser(data.session.user)
-        navigate('/')
+        if (data.user.user_metadata.admin == 'true') {
+            setActiveUser(data.session.user)
+            navigate('/dashboard')
+        }
+
     }
 
     return (
@@ -40,10 +49,10 @@ function Login() {
                     <input className='input input-bordered input-primary mb-2 w-full' type="email" name="email" id="email" placeholder='Escribe tu email' value={query.email} onChange={(e) => setQuery({ ...query, email: e.target.value })} />
                     <input className='input input-bordered input-primary mb-2 w-full' type="password" name="password" id="password" placeholder='Escribe tu contraseña' value={query.password} onChange={(e) => setQuery({ ...query, password: e.target.value })} />
                     <button className='btn btn-primary w-full' onClick={loginHandler}>Ingresar</button>
-                    <Link className='mr-2' to='/signup'>Regístrate</Link>
+
                 </div>}
         </div>
     )
 }
 
-export default Login
+export default DashboardLogin

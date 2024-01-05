@@ -13,6 +13,9 @@ import Checkout from './routes/Checkout.jsx'
 import ProductPage from './routes/ProductPage.jsx'
 import { loader as productLoader } from './routes/ProductPage.jsx'
 import '@smastrom/react-rating/style.css'
+import Signup from './routes/Signup.jsx'
+import DashboardLogin from './routes/DashboardLogin.jsx'
+import Dashboard from './routes/Dashboard.jsx'
 
 
 const router = createBrowserRouter([
@@ -34,8 +37,16 @@ const router = createBrowserRouter([
         path:'/products/:productId',
         element: <ProductPage />,
         loader: productLoader
+      },{
+        path:'/signup',
+        element: <Signup />
+      },{
+        path:'/dashboard-login',
+        element: <DashboardLogin />
+      },{
+        path:'/dashboard',
+        element: <Dashboard />
       }
-
     ]
   },
 ])

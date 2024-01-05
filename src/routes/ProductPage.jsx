@@ -23,7 +23,7 @@ function ProductPage() {
   const products = useRecoilValue(productsState)
 
   let similarProducts = products.filter((p) => product.title[0] == p.title[0] && product.id != p.id)
-  let grade = (product.reviews.length > 0) ? product.reviews.reduce((a, b) => a + b, 0) / product.reviews.length : 0.0
+  let grade = (product.ratings.length > 0) ? product.ratings.reduce((a, b) => a + b, 0) / product.ratings.length  : 0
 
 
   return (
@@ -33,7 +33,7 @@ function ProductPage() {
       <main className='flex flex-col items-center justify-center h-full'>
         <div className="card bg-base-300 w-4/5 my-8">
           <div className="card-body">
-
+            <figure><img src={product.image} alt={product.title} /></figure>
             <div className="card-title mb-2">
               {product.title}
             </div>
@@ -42,13 +42,13 @@ function ProductPage() {
               <div className="text-xl font-bold text-secondary mb-2 border-box"> ${product.price.toLocaleString()} COP </div>
 
               <p className="text-lg mb-2">Descripción:</p>
-              <p className='italic text-base text-neutral mb-2'>{product.description}</p>
+              <p className='italic text-base text-neutral mb-2 my-8'>{product.description}</p>
 
-              <p className='mb-2'>Calificación: {grade.toFixed(1)} ({product.reviews.length})</p>
+              <p className='mb-2'>Calificación: {grade.toFixed(1)} ({product.ratings.length})</p>
 
               <div className="card-actions items-center justify-center">
                 <AddToCart product={product}/>
-                <AddReview />
+                <AddReview productId={product.id} />
               </div>
 
             </div>
