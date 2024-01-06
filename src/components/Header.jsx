@@ -21,7 +21,7 @@ function Header({ children }) {
                 }
 
                 {(user.id) ?
-                    <div className="dropdown">
+                    <div className="dropdown dropdown-bottom dropdown-end">
                         <div tabIndex={0} role="button" className="mx-1">{user.user_metadata.username}</div>
                         {(user.user_metadata.admin) &&
                             <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
