@@ -14,7 +14,7 @@ function CreateProduct() {
     const [uploadMessage, setUploadMessage] = useState()
     const [query, setQuery] = useState({
         productTitle: '',
-        productPrice,
+        productPrice: 0,
         productDescription: '',
         productImage: ''
     })
