@@ -3,6 +3,7 @@ import { supabase } from '../supabaseClient.js'
 import { useNavigate } from 'react-router-dom'
 import { atom, useRecoilState } from 'recoil'
 import { Link } from 'react-router-dom'
+import { userState } from './Login.jsx'
 
 
 function DashboardLogin() {
@@ -29,7 +30,7 @@ function DashboardLogin() {
             navigate('/dashboard-login')
             setLoading(false)
         }
-        
+
         if (data.user.user_metadata.admin == 'true') {
             setActiveUser(data.session.user)
             navigate('/dashboard')
