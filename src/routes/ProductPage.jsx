@@ -34,7 +34,7 @@ function ProductPage() {
         <div className="card bg-base-300 w-4/5 my-8">
           <div className="card-body">
             <figure><img src={product.image} alt={product.title} /></figure>
-            <div className="card-title mb-2">
+            <div className="card-title mb-2"> 
               {product.title}
             </div>
 

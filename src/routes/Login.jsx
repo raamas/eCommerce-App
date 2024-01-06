@@ -40,7 +40,7 @@ function Login() {
                     <input className='input input-bordered input-primary mb-2 w-full' type="email" name="email" id="email" placeholder='Escribe tu email' value={query.email} onChange={(e) => setQuery({ ...query, email: e.target.value })} />
                     <input className='input input-bordered input-primary mb-2 w-full' type="password" name="password" id="password" placeholder='Escribe tu contraseña' value={query.password} onChange={(e) => setQuery({ ...query, password: e.target.value })} />
                     <button className='btn btn-primary w-full' onClick={loginHandler}>Ingresar</button>
-                    <Link className='mr-2' to='/signup'>Regístrate</Link>
+                    <Link className='m-4' to='/signup'>Regístrate</Link>
                 </div>}
         </div>
     )

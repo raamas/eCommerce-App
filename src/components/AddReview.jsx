@@ -24,6 +24,7 @@ function AddReview({ productId }) {
             .single()
 
 
+        console.log(res)
 
         let { data, error } = await supabase.from('products')
             .update({
@@ -50,7 +51,7 @@ function AddReview({ productId }) {
                     <p className='mb-2'>Deja tu calificación:</p>
                     <Rating value={rating} onChange={setRating} style={{ maxWidth: '20em', maxHeight: '3em', }} itemStyles={ratingStyle} />
                     <button onClick={handleReview} className='btn btn-accent w-full my-2'>Enviar calificación</button>
-                    {successMessage}
+                    <p className="text-success">{successMessage}</p>
                 </div>
                 : <p>Inicia sesión para dejarnos tu  calificación de este producto</p>
             }

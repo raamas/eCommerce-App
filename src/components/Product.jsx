@@ -7,6 +7,8 @@ import AddToCart from './AddToCart.jsx'
 
 function Product({ product }) {
     const user = useRecoilValue(userState)
+    let grade = (product.ratings.length > 0) ? product.ratings.reduce((a, b) => a + b, 0) / product.ratings.length : 0
+
 
     return (
         <div className="card card-bordered shadow-sm m-2 w-full">
@@ -14,10 +16,11 @@ function Product({ product }) {
                 <figure> <img src={product.image} alt={product.title} className='min-w-full' /> </figure>
                 <h3 className="card-title"> <Link to={'/products/' + product.id} >{product.title}</Link> </h3>
                 <p>${product.price.toLocaleString()}</p>
+                <p className='mb-2'>Calificación: {grade.toFixed(1)} ({product.ratings.length})</p>
                 {(user.id) &&
                     <div className="card-actions items-center justify-center">
-                        <button className='btn btn-primary w-full mt-2'> <Link to='/checkout'>Comprar</Link> </button>
-                        <AddToCart product={product}/>
+
+                        <AddToCart product={product} />
                     </div>
                 }
             </div>

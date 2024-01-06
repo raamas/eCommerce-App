@@ -4,11 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { atom, useRecoilState } from 'recoil'
 import { Link } from 'react-router-dom'
 
-export const userState = atom({
-    key: 'userState',
-    default: {}
-})
-
 
 function DashboardLogin() {
     const [query, setQuery] = useState({ email: '', password: '' })

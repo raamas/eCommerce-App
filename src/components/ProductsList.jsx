@@ -3,39 +3,32 @@ import Product from './Product.jsx'
 import { atom, useRecoilState } from 'recoil'
 import { supabase } from '../supabaseClient.js'
 import { useEffect } from 'react'
+import { getProducts } from '../utils.js'
 
 export const productsState = atom({
-    key: 'productsState',
-    default: []
+  key: 'productsState',
+  default: []
 })
 
 function ProductsList() {
-    const [products, setProducts] = useRecoilState(productsState)
+  const [products, setProducts] = useRecoilState(productsState)
 
-    useEffect(() => {
-      const getProducts = async ()=>{
-        let {data, error} = await supabase
-        .from('products')
-        .select()
+  useEffect(() => {
+    let invokeGetProducts = async () => {
+      let data = await getProducts()
+      setProducts(data)
+    }
 
-        if(!data){
-            console.log(error.stack)
-        }
-        
-        setProducts(data)
-      }
-
-      getProducts()
-    }, [])
-    
+    invokeGetProducts()
+  }, [])
 
   return (
     <div className='flex flex-row items-center justify-center flex-wrap p-2'>
-        { (products) && 
-            products.map((product)=>{
-                return <Product key={product.id} product={product}/>
-            })
-        }
+      {(products) &&
+        products.map((product) => {
+          return <Product key={product.id} product={product} />
+        })
+      }
     </div>
   )
 }
