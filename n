@@ -1,0 +1,311 @@
+[33mcommit 0005262dfc65417284f056aa545aed5f4a8ddd68[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: ommars <omardenilson007@gmail.com>
+Date:   Sat Jan 6 14:58:27 2024 -0500
+
+    Fixed most dashboard, create product and, dashboard login errors, etc
+
+[1mdiff --git a/package.json b/package.json[m
+[1mindex 8f6cef6..c27d657 100644[m
+[1m--- a/package.json[m
+[1m+++ b/package.json[m
+[36m@@ -15,8 +15,10 @@[m
+     "daisyui": "^4.4.20",[m
+     "react": "^18.2.0",[m
+     "react-dom": "^18.2.0",[m
+[32m+[m[32m    "react-icons": "^4.12.0",[m
+     "react-router-dom": "^6.21.0",[m
+[31m-    "recoil": "^0.7.7"[m
+[32m+[m[32m    "recoil": "^0.7.7",[m
+[32m+[m[32m    "uuid": "^9.0.1"[m
+   },[m
+   "devDependencies": {[m
+     "@types/react": "^18.2.43",[m
+[1mdiff --git a/src/components/AddReview.jsx b/src/components/AddReview.jsx[m
+[1mindex caf0832..9ba2a43 100644[m
+[1m--- a/src/components/AddReview.jsx[m
+[1m+++ b/src/components/AddReview.jsx[m
+[36m@@ -24,6 +24,7 @@[m [mfunction AddReview({ productId }) {[m
+             .single()[m
+ [m
+ [m
+[32m+[m[32m        console.log(res)[m
+ [m
+         let { data, error } = await supabase.from('products')[m
+             .update({[m
+[36m@@ -50,7 +51,7 @@[m [mfunction AddReview({ productId }) {[m
+                     <p className='mb-2'>Deja tu calificación:</p>[m
+                     <Rating value={rating} onChange={setRating} style={{ maxWidth: '20em', maxHeight: '3em', }} itemStyles={ratingStyle} />[m
+                     <button onClick={handleReview} className='btn btn-accent w-full my-2'>Enviar calificación</button>[m
+[31m-                    {successMessage}[m
+[32m+[m[32m                    <p className="text-success">{successMessage}</p>[m
+                 </div>[m
+                 : <p>Inicia sesión para dejarnos tu  calificación de este producto</p>[m
+             }[m
+[1mdiff --git a/src/components/CreateProduct.jsx b/src/components/CreateProduct.jsx[m
+[1mindex a602092..5e1a265 100644[m
+[1m--- a/src/components/CreateProduct.jsx[m
+[1m+++ b/src/components/CreateProduct.jsx[m
+[36m@@ -1,25 +1,98 @@[m
+ import React, { useState } from 'react'[m
+[31m-import { supabase } from '../supabaseClient'[m
+[32m+[m[32mimport { supabase } from '../supabaseClient.js'[m
+[32m+[m[32mimport { v4 as uuid } from 'uuid'[m
+[32m+[m[32mimport { useRecoilValue } from 'recoil'[m
+[32m+[m[32mimport { userState } from '../routes/Login.jsx'[m
+[32m+[m[32mimport { productsState } from './ProductsList.jsx'[m
+[32m+[m[32mimport { useRecoilState } from 'recoil'[m
+[32m+[m[32mimport { getProducts } from '../utils.js'[m
+[32m+[m
+ [m
+ function CreateProduct() {[m
+[31m-    const [query, setQuery] = useState()[m
+[32m+[m[32m    const user = useRecoilValue(userState)[m
+[32m+[m[32m    const [products, setProducts] = useRecoilState(productsState)[m
+[32m+[m[32m    const [uploadMessage, setUploadMessage] = useState()[m
+[32m+[m[32m    const [query, setQuery] = useState({[m
+[32m+[m[32m        productTitle: '',[m
+[32m+[m[32m        productPrice,[m
+[32m+[m[32m        productDescription: '',[m
+[32m+[m[32m        productImage: ''[m
+[32m+[m[32m    })[m
+[32m+[m
+[32m+[m[32m    const uploadImage = async () => {[m
+[32m+[m[32m        console.log('uploading image')[m
+ [m
+[31m-    const handleCreateProduct = async () => {[m
+         const productImage = document.body.getElementsByClassName('productImage')[0].files[0][m
+[32m+[m[32m        let imageExtension = String().split('.').pop()[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        let res = await supabase.storage[m
+[32m+[m[32m            .from("products-pictures")[m
+[32m+[m[32m            .upload(`images/${uuid()}.${imageExtension}`, productImage)[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        res = await supabase[m
+[32m+[m[32m            .storage[m
+[32m+[m[32m            .from('products-pictures')[m
+[32m+[m[32m            .getPublicUrl(res.data.path)[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        if (res.data) {[m
+[32m+[m[32m            setQuery({ ...query, productImage: res.data.publicUrl })[m
+[32m+[m[32m            setUploadMessage('Imagen subida correctamente')[m
+ [m
+[31m-        console.log(productImage)[m
+[31m-        const res = await supabase.storage[m
+[31m-        .from("products-pictures")[m
+[31m-        .upload('image.jpg', productImage)[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    const handleCreateProduct = async () => {[m
+[32m+[m[32m        let res = await supabase[m
+[32m+[m[32m            .from('products')[m
+[32m+[m[32m            .insert({[m
+[32m+[m[32m                title: query.productTitle,[m
+[32m+[m[32m                description: query.productDescription,[m
+[32m+[m[32m                price: query.productPrice,[m
+[32m+[m[32m                sellerId: user.id,[m
+[32m+[m[32m                image: query.productImage[m
+[32m+[m[32m            })[m
+[32m+[m[32m            .select()[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        if (res.data) {[m
+[32m+[m[32m            setQuery({[m
+[32m+[m[32m                productTitle: '',[m
+[32m+[m[32m                productPrice: 0,[m
+[32m+[m[32m                productDescription: '',[m
+[32m+[m[32m                productImage: ''[m
+[32m+[m[32m            })[m
+[32m+[m[32m        }[m
+ [m
+[31m-        console.log(res)[m
+[32m+[m[32m        let data = await getProducts()[m
+[32m+[m[32m        setProducts(data)[m
+[32m+[m[32m        setUploadMessage('')[m
+     }[m
+[32m+[m
+     return ([m
+[31m-        <div>[m
+[31m-            <h1>Añadir producto</h1>[m
+[31m-            <input type="file" name="productImage" id="productImage" className='productImage' />[m
+[31m-            {/* <input type="text" name='productTitle' id='productTitle' /> */}[m
+[31m-            <button className='btn btn-primary' onClick={handleCreateProduct}>Crear</button>[m
+[32m+[m[32m        <div className='flex flex-col items-center justify-center my-8'>[m
+[32m+[m[32m            <h1 className='text-lg font-semibold'>Añadir producto</h1>[m
+[32m+[m[32m            <p className='my-2 text-success-content'>{uploadMessage}</p>[m
+[32m+[m
+[32m+[m[32m            <label className='my-4 font-semibold'>Imagen del producto</label>[m
+[32m+[m[32m            <input type="file" name="productImage" id="productImage" className='productImage' onChange={uploadImage} />[m
+[32m+[m
+[32m+[m[32m            <label className='mt-2 font-semibold'>Titulo del producto</label>[m
+[32m+[m[32m            <input type="text" className='input input-primary m-2 w-full' required placeholder='Escribe el titulo de tu producto' name='productTitle' id='productTitle' value={query.productTitle} onChange={(e) => setQuery({ ...query, productTitle: e.target.value })} />[m
+[32m+[m
+[32m+[m[32m            <label className='mt-2 font-semibold'>Precio del producto</label>[m
+[32m+[m[32m            <input type="number" className='input input-primary m-2 w-full' required placeholder='Escribe el precio de tu producto' name='productPrice' id='productPrice' value={query.productPrice} onChange={(e) => setQuery({ ...query, productPrice: e.target.value })} />[m
+[32m+[m
+[32m+[m[32m            <label className='mt-2 font-semibold'>Descripción del producto</label>[m
+[32m+[m[32m            <input type="text" className='input input-primary m-2 w-full' required placeholder='Escribe una descripción para tu producto' name='productDescription' id='productDescription' value={query.productDescription} onChange={(e) => setQuery({ ...query, productDescription: e.target.value })} />[m
+[32m+[m
+[32m+[m[32m            <button className='btn btn-primary w-full m-2' onClick={handleCreateProduct}>Crear</button>[m
+         </div>[m
+     )[m
+ }[m
+[1mdiff --git a/src/components/DashboardProductList.jsx b/src/components/DashboardProductList.jsx[m
+[1mindex aa88a7a..2f42861 100644[m
+[1m--- a/src/components/DashboardProductList.jsx[m
+[1m+++ b/src/components/DashboardProductList.jsx[m
+[36m@@ -4,6 +4,8 @@[m [mimport { atom, useRecoilState } from 'recoil'[m
+ import { supabase } from '../supabaseClient.js'[m
+ import { useEffect } from 'react'[m
+ import { productsState } from './ProductsList.jsx'[m
+[32m+[m[32mimport { Link } from 'react-router-dom'[m
+[32m+[m[32mimport { getProducts } from '../utils.js'[m
+ [m
+ // export const productsState = atom({[m
+ //     key: 'productsState',[m
+[36m@@ -14,35 +16,53 @@[m [mfunction ProductListDashboard() {[m
+     const [products, setProducts] = useRecoilState(productsState)[m
+ [m
+     useEffect(() => {[m
+[31m-        const getProducts = async () => {[m
+[31m-            let { data, error } = await supabase[m
+[31m-                .from('products')[m
+[31m-                .select()[m
+[31m-[m
+[31m-            if (!data) {[m
+[31m-                console.log(error.stack)[m
+[31m-            }[m
+[31m-[m
+[32m+[m[32m        let invokeGetProducts = async () => {[m
+[32m+[m[32m            let data = await getProducts()[m
+             setProducts(data)[m
+         }[m
+ [m
+[31m-        getProducts()[m
+[32m+[m[32m        invokeGetProducts()[m
+     }, [])[m
+ [m
+ [m
+[32m+[m[32m    const deleteProduct = async (productId) => {[m
+[32m+[m[32m        console.log(`Deleting Product: ${productId}`)[m
+[32m+[m[32m        let res = await supabase.from('products')[m
+[32m+[m[32m            .delete()[m
+[32m+[m[32m            .eq('id', productId)[m
+[32m+[m
+[32m+[m[32m        console.log(res)[m
+[32m+[m
+[32m+[m[32m        console.log('updating products list')[m
+[32m+[m[32m        if (res.data) {[m
+[32m+[m[32m            setProducts(res.data)[m
+[32m+[m[32m            console.log('success')[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        let data = await getProducts()[m
+[32m+[m[32m        setProducts(data)[m
+[32m+[m[32m        console.log(res)[m
+[32m+[m
+[32m+[m[32m    }[m
+[32m+[m
+     return ([m
+[31m-        <div className='flex flex-row items-center justify-center flex-wrap p-2'>[m
+[32m+[m[32m        <div className='flex flex-row items-center justify-center flex-wrap '>[m
+             {(products) &&[m
+                 products.map((product) => {[m
+                     let grade = (product.ratings.length > 0) ? product.ratings.reduce((a, b) => a + b, 0) / product.ratings.length : 0[m
+ [m
+                     return ([m
+                         <div key={product.id} className="card card-compact bg-base-300 mb-4 w-full">[m
+[31m-                            <div className="card-body min-w-2/5 flex flex-row items-center justify-center">[m
+[31m-                                <h2 className="card-title">{product.title}</h2>[m
+[31m-                                <p>${product.price.toLocaleString()}</p>[m
+[31m-                                <p>{grade.toFixed(1)}</p>[m
+[32m+[m[32m                            <div className="card-body flex flex-col ">[m
+[32m+[m[32m                                <h2 className="card-title"> <Link to={'/products/' + product.id} >{product.title}</Link> </h2>[m
+[32m+[m[32m                                <p>Precio: ${product.price.toLocaleString()}</p>[m
+[32m+[m[32m                                <p>Calificación: {grade.toFixed(1)}</p>[m
+[32m+[m[32m                                <div className="card-actions w-full items-center justify-center m-2">[m
+[32m+[m[32m                                    <button className="btn btn-error w-2/5" onClick={() => deleteProduct(product.id)}>Eliminar Producto</button>[m
+[32m+[m[32m                                    <button className="btn btn-info w-2/5" disabled onClick={() => deleteProduct(product.id)}>Editar Producto</button>[m
+[32m+[m[32m                                </div>[m
+                             </div>[m
+[32m+[m
+                         </div>[m
+                     )[m
+                 })[m
+[1mdiff --git a/src/components/Header.jsx b/src/components/Header.jsx[m
+[1mindex 1357428..01269e3 100644[m
+[1m--- a/src/components/Header.jsx[m
+[1m+++ b/src/components/Header.jsx[m
+[36m@@ -3,19 +3,34 @@[m [mimport { useRecoilValue } from 'recoil'[m
+ import { shoppingCartState } from '../routes/Home.jsx'[m
+ import { Link } from 'react-router-dom'[m
+ import { userState } from '../routes/Login.jsx'[m
+[32m+[m[32mimport { FaMagnifyingGlass } from "react-icons/fa6"[m
+[32m+[m[32mimport { FaCartShopping } from "react-icons/fa6";[m
+[32m+[m
+ [m
+ function Header({ children }) {[m
+     const cart = useRecoilValue(shoppingCartState)[m
+     const user = useRecoilValue(userState)[m
+[31m-    console.log(user)[m
+[31m-[m
+     return ([m
+         <div className="navbar flex flex-row justify-around w-full bg-base-200">[m
+             <h1> <Link to='/' >eCommerce App</Link> </h1>[m
+             <div>[m
+[31m-                <a href="#" className='mx-1'>Search</a>[m
+[31m-                {(user.id) && (cart.length > 0) ? <Link to='/checkout' className='mx-1'>Cart[{cart.length}]</Link> : <p className='mx-1'>Cart[{cart.length}]</p>}[m
+[31m-                {(user.id) ? <p className='mx-1'>{user.user_metadata.username}</p> : <span><Link className='mr-2' to='/login'>Iniciar sesión</Link></span>}[m
+[32m+[m[32m                <a href="#" className='mx-1'> <FaMagnifyingGlass /> </a>[m
+[32m+[m[32m                {(user.id) && (cart.length > 0) ?[m
+[32m+[m[32m                    <Link to='/checkout' className='mx-1'> <FaCartShopping /> <p>{cart.length}</p> </Link> :[m
+[32m+[m[32m                    <span className='mx-1 flex' ><FaCartShopping /> <p className='text-sm mx-1'>{cart.length}</p> </span>[m
+[32m+[m[32m                }[m
+[32m+[m
+[32m+[m[32m                {(user.id) ?[m
+[32m+[m[32m                    <div className="dropdown">[m
+[32m+[m[32m                        <div tabIndex={0} role="button" className="mx-1">{user.user_metadata.username}</div>[m
+[32m+[m[32m                        {(user.user_metadata.admin) &&[m
+[32m+[m[32m                            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">[m
+[32m+[m[32m                                <li> <Link to='/dashboard'>Panel de control</Link> </li>[m
+[32m+[m[32m                            </ul>[m
+[32m+[m[32m                        }[m
+[32m+[m[32m                    </div> :[m
+[32m+[m[32m                    <span><Link className='mx-1' to='/login'>Iniciar sesión</Link></span>[m
+[32m+[m[32m                }[m
+ [m
+                 {children}[m
+             </div>[m
+[1mdiff --git a/src/components/Product.jsx b/src/components/Product.jsx[m
+[1mindex f96e0e8..8a32b76 100644[m
+[1m--- a/src/components/Product.jsx[m
+[1m+++ b/src/components/Product.jsx[m
+[36m@@ -7,6 +7,8 @@[m [mimport AddToCart from './AddToCart.jsx'[m
+ [m
+ function Product({ product }) {[m
+     const user = useRecoilValue(userState)[m
+[32m+[m[32m    let grade = (product.ratings.length > 0) ? product.ratings.reduce((a, b) => a + b, 0) / product.ratings.length : 0[m
+[32m+[m
+ [m
+     return ([m
+         <div className="card card-bordered shadow-sm m-2 w-full">[m
+[36m@@ -14,10 +16,11 @@[m [mfunction Product({ product }) {[m
+                 <figure> <img src={product.image} alt={product.title} className='min-w-full' /> </figure>[m
+                 <h3 className="card-title"> <Link to={'/products/' + product.id} >{product.title}</Link> </h3>[m
+                 <p>${product.price.toLocaleString()}</p>[m
+[32m+[m[32m                <p className='mb-2'>Calificación: {grade.toFixed(1)} ({product.ratings.length})</p>[m
+                 {(user.id) &&[m
+                     <div className="card-actions items-center justify-center">[m
+[31m-                        <button className='btn btn-primary w-full mt-2'> <Link to='/checkout'>Comprar</Link> </button>[m
+[31m-                        <AddToCart product={product}/>[m
+[32m+[m
+[32m+[m[32m                        <AddToCart product={product} />[m
+                     </div>[m
+            

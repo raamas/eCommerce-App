@@ -80,9 +80,6 @@ function CreateProduct() {
             <h1 className='text-lg font-semibold'>Añadir producto</h1>
             <p className='my-2 text-success-content'>{uploadMessage}</p>
 
-            <label className='my-4 font-semibold'>Imagen del producto</label>
-            <input type="file" name="productImage" id="productImage" className='productImage' onChange={uploadImage} />
-
             <label className='mt-2 font-semibold'>Titulo del producto</label>
             <input type="text" className='input input-primary m-2 w-full' required placeholder='Escribe el titulo de tu producto' name='productTitle' id='productTitle' value={query.productTitle} onChange={(e) => setQuery({ ...query, productTitle: e.target.value })} />
 
@@ -92,6 +89,9 @@ function CreateProduct() {
             <label className='mt-2 font-semibold'>Descripción del producto</label>
             <input type="text" className='input input-primary m-2 w-full' required placeholder='Escribe una descripción para tu producto' name='productDescription' id='productDescription' value={query.productDescription} onChange={(e) => setQuery({ ...query, productDescription: e.target.value })} />
 
+            <label className='my-4 font-semibold'>Imagen del producto</label>
+            <input type="file" name="productImage" id="productImage" className='productImage' onChange={uploadImage} />
+            
             <button className='btn btn-primary w-full m-2' onClick={handleCreateProduct}>Crear</button>
         </div>
     )

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { supabase } from '../supabaseClient.js'
+import { supabase } from '../../supabaseClient.js'
 import { useNavigate } from 'react-router-dom'
 import { atom, useRecoilState } from 'recoil'
 import { Link } from 'react-router-dom'
-import { userState } from './Login.jsx'
+import { userState } from '../Login.jsx'
 
 
 function DashboardLogin() {

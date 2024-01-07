@@ -14,6 +14,7 @@ function Checkout() {
   return (
     <div >
       <Header></Header>
+      <main className='min-h-max-content'>
       <div className="flex flex-col justify-center items-center p-4 h-full">
         {(cart.length) ?
           <div className="w-4/5 products overflow-y-auto ">
@@ -31,6 +32,7 @@ function Checkout() {
           : <div className="min-h-screen"> No hay nada en el carrito :( </div>
         }
       </div>
+      </main>
       {(cart.length > 0) &&
         <div className="w-full bg-base-200 p-4 sticky bottom-0 min-h-[10rem] checkoutDescription flex flex-col justify-center items-center ">
           <p className="totalPrice flex flex-col text-center items-center w-4/5 mb-2">

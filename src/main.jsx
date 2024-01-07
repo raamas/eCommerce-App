@@ -14,8 +14,10 @@ import ProductPage from './routes/ProductPage.jsx'
 import { loader as productLoader } from './routes/ProductPage.jsx'
 import '@smastrom/react-rating/style.css'
 import Signup from './routes/Signup.jsx'
-import DashboardLogin from './routes/DashboardLogin.jsx'
-import Dashboard from './routes/Dashboard.jsx'
+import DashboardLogin from './routes/dashboard/DashboardLogin.jsx'
+import Dashboard from './routes/dashboard/Dashboard.jsx'
+import UpdateProduct from './components/UpdateProduct.jsx'
+import { loader as updateProductLoader } from './components/UpdateProduct.jsx'
 
 
 const router = createBrowserRouter([
@@ -24,12 +26,14 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       {
+        index:true,
+        element: <Home />
+      },{
+        path:'/signup',
+        element: <Signup />
+      },      {
         path: '/login',
         element: <Login />
-      }, {
-        index:true,
-        // path: '/',
-        element: <Home />
       }, {
         path: '/checkout',
         element: <Checkout />
@@ -38,10 +42,12 @@ const router = createBrowserRouter([
         element: <ProductPage />,
         loader: productLoader
       },{
-        path:'/signup',
-        element: <Signup />
-      },{
-        path:'/dashboard-login',
+        path:'/products/:productId/edit',
+        element: <UpdateProduct />,
+        loader: updateProductLoader
+      },
+      {
+        path:'/dashboard/login',
         element: <DashboardLogin />
       },{
         path:'/dashboard',
