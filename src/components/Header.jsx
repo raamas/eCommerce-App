@@ -40,11 +40,11 @@ function Header({ children }) {
 
                     <Link to='/checkout' className='mx-1 flex items-center'>
                         <FaCartShopping />
-                        <p>1000</p>
+                        <p>{cart.length}</p>
                     </Link> :
                     <span className='mx-1 flex items-center' >
                         <FaCartShopping />
-                        <p className='text-sm mx-1'>1000</p>
+                        <p className='text-sm mx-1'>{cart.length}</p>
                     </span>
                 }
 
