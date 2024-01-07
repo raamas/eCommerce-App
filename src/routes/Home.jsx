@@ -15,8 +15,8 @@ function Home() {
         <div className='flex flex-col items-center justify-center'>
             <Header>       </Header>
 
-            <div className="hero bg-base-300 min-h-[30vh] " style={{backgroundImage: 'url(https://loremflickr.com/2000/2000/londres,landscape/all)'}}>
-                <div className="hero-overlay opacity-80 max-w-fit"></div>
+            <div className="hero bg-base-300 min-h-[70vh] " style={{backgroundImage: 'url(https://loremflickr.com/2000/2000/londres,landscape/all)'}}>
+                <div className="hero-overlay opacity-80 min-h-[70vh] max-w-fit-content"></div>
                 <div className="hero-content">
                     <h2 className='text-neutral-content font-bold text-xl text-center'>The Best eCommerce Available</h2>
                 </div>
