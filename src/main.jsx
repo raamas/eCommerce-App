@@ -18,6 +18,7 @@ import DashboardLogin from './routes/dashboard/DashboardLogin.jsx'
 import Dashboard from './routes/dashboard/Dashboard.jsx'
 import UpdateProduct from './components/UpdateProduct.jsx'
 import { loader as updateProductLoader } from './components/UpdateProduct.jsx'
+import Success from './routes/Success.jsx'
 
 
 const router = createBrowserRouter([
@@ -52,6 +53,9 @@ const router = createBrowserRouter([
       },{
         path:'/dashboard',
         element: <Dashboard />
+      },{
+        path: '/success',
+        element: <Success />
       }
     ]
   },

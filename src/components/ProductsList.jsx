@@ -22,6 +22,8 @@ function ProductsList() {
     invokeGetProducts()
   }, [])
 
+
+
   return (
     <div className='flex flex-row items-center justify-center flex-wrap p-2'>
       {(products) &&

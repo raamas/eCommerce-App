@@ -23,7 +23,7 @@ function ProductPage() {
   const products = useRecoilValue(productsState)
 
   let similarProducts = products.filter((p) => product.title[0] == p.title[0] && product.id != p.id)
-  let grade = (product.ratings.length > 0) ? product.ratings.reduce((a, b) => a + b, 0) / product.ratings.length  : 0
+  let grade = (product.ratings.length > 0) ? product.ratings.reduce((a, b) => a + b, 0) / product.ratings.length : 0
 
 
   return (
@@ -34,7 +34,7 @@ function ProductPage() {
         <div className="card bg-base-300 w-4/5 my-8">
           <div className="card-body">
             <figure><img src={product.image} alt={product.title} /></figure>
-            <div className="card-title mb-2"> 
+            <div className="card-title mb-2">
               {product.title}
             </div>
 
@@ -47,7 +47,7 @@ function ProductPage() {
               <p className='mb-2'>Calificación: {grade.toFixed(1)} ({product.ratings.length})</p>
 
               <div className="card-actions items-center justify-center">
-                <AddToCart product={product}/>
+                <AddToCart product={product} />
                 <AddReview productId={product.id} />
               </div>
 
@@ -61,7 +61,7 @@ function ProductPage() {
           return (
             <div key={similarProduct.id} className="card card-side max-w-fit bg-base-200 mb-4 w-4/5">
               <div className="card-body">
-                <div className="card-title ">{similarProduct.title}</div>
+                <div className="card-title "><Link to={'/products/' + product.id}>{similarProduct.title}</Link></div>
                 <p className='italic' >${similarProduct.price.toLocaleString()}</p>
               </div>
             </div>
