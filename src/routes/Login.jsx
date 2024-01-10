@@ -17,6 +17,7 @@ function Login() {
     const navigate = useNavigate()
 
     const loginHandler = async () => {
+        setLoading(true)
 
         let { data, error } = await supabase.auth.signInWithPassword({
             email:query.email,
@@ -35,12 +36,13 @@ function Login() {
 
     return (
         <div className='flex flex-col justify-center items-center w-full h-screen '>
-            {(loading) ? <p>Cargando</p>
-                : <div className="form flex flex-col justify-center items-center w-4/5 p-2">
+            {(loading) ? <span className="loading loading-spinner loading-lg"></span>
+                : <div className="form flex flex-col justify-center items-center w-4/5 p-4 rounded-lg bg-base-200 border border-base-300">
+                    <h2 className='text-lg font-semibold my-6'>Iniciar sesión</h2>
                     <input className='input input-bordered input-primary mb-2 w-full' type="email" name="email" id="email" placeholder='Escribe tu email' value={query.email} onChange={(e) => setQuery({ ...query, email: e.target.value })} />
                     <input className='input input-bordered input-primary mb-2 w-full' type="password" name="password" id="password" placeholder='Escribe tu contraseña' value={query.password} onChange={(e) => setQuery({ ...query, password: e.target.value })} />
                     <button className='btn btn-primary w-full' onClick={loginHandler}>Ingresar</button>
-                    <Link className='m-4' to='/signup'>Regístrate</Link>
+                    <Link className='m-4 font-bold underline decoration-2 text-primary' to='/signup'>Regístrate</Link>
                 </div>}
         </div>
     )

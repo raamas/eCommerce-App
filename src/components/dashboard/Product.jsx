@@ -32,7 +32,7 @@ function Product({product}) {
     }
 
     return (
-        <div className="card card-compact bg-base-300 mb-4 w-full">
+        <div className="card card-compact bg-base-200 border border-base-300 mb-4 w-full">
             <div className="card-body flex flex-col ">
                 <h2 className="card-title"> <Link to={'/products/' + product.id} >{product.title}</Link> </h2>
                 <p>Precio: ${product.price.toLocaleString()}</p>

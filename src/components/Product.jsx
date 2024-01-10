@@ -11,7 +11,7 @@ function Product({ product }) {
 
 
     return (
-        <div className="card card-bordered shadow-sm m-2 w-full">
+        <div className="card card-bordered border-base-300 bg-base-200 m-2 w-full">
             <div className="card-body">
                 <figure> <img src={product.image} alt={product.title} className='min-w-full' /> </figure>
                 <h3 className="card-title"> <Link to={'/products/' + product.id} >{product.title}</Link> </h3>

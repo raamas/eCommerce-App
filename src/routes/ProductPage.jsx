@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, Link } from 'react-router-dom'
 import { supabase } from '../supabaseClient.js'
 import Header from '../components/Header.jsx'
 import { productsState } from '../components/ProductsList.jsx'
@@ -39,7 +39,7 @@ function ProductPage() {
             </div>
 
             <div className="card-info mb-2">
-              <div className="text-xl font-bold text-secondary mb-2 border-box"> ${product.price.toLocaleString()} COP </div>
+              <div className="text-xl font-bold text-primary mb-2 border-box"> ${product.price.toLocaleString()} COP </div>
 
               <p className="text-lg mb-2">Descripción:</p>
               <p className='italic text-base text-neutral mb-2 my-8'>{product.description}</p>

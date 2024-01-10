@@ -32,8 +32,9 @@ function Dashboard() {
           <button className='btn btn-primary w-full' onClick={() => setShowProductForm(true)}>Añadir producto nuevo</button>
           {showProductForm && <CreateProduct />}
 
-          <h2 className='text-lg my-4'>Orders</h2>
-          <DashboardOrdersList />
+          <h2 className='text-lg my-4'>Ordenes</h2>
+          <p>En construcción</p>
+          {/* <DashboardOrdersList /> */}
         </div>
       </main>
     </div>

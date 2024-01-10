@@ -3,7 +3,7 @@ import { useRecoilValue, useRecoilState } from 'recoil'
 import { userState } from '../routes/Login.jsx'
 import { shoppingCartState } from '../routes/Home.jsx'
 
-function AddToCart({product}) {
+function AddToCart({product, className}) {
   const user = useRecoilValue(userState)
   const [cart, setCart] = useRecoilState(shoppingCartState)
 
@@ -15,7 +15,7 @@ function AddToCart({product}) {
   return (
     <>
     {user.id 
-    ?<button className='btn btn-secondary w-full mt-2' onClick={(e) => addProductToCart(e)} > Añadir al carrito </button>
+    ?<button className='btn w-full mt-2 btn-primary' onClick={(e) => addProductToCart(e)} > Añadir al carrito </button>
     :<button className='btn btn-disabled btn-secondary w-full mt-2' onClick={(e) => addProductToCart(e)} > Añadir al carrito </button>
     }
     </>

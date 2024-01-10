@@ -13,15 +13,14 @@ export const getProducts = async () => {
     return data
 }
 
-export const getOrders = async () => {
-    let { data, error } = await supabase
-        .from('orders')
-        .select()
-        .order('buyerId', { ascending: false })
+// export const getOrders = async () => {
+//     let { data, error } = await supabase
+//     .auth()
+//     .admin
 
-    if (!data) {
-        console.log(error)
-    }
+//     if (!data) {
+//         console.log(error)
+//     }
 
-    return data
-}
+//     return data
+// }

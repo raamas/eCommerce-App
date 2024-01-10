@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Header from '../components/Header'
 import ProductsList from '../components/ProductsList.jsx'
-import {atom} from 'recoil'
+import { atom } from 'recoil'
 
 
 export const shoppingCartState = atom({
@@ -13,9 +13,9 @@ function Home() {
 
     return (
         <div className='flex flex-col items-center justify-center'>
-            <Header>       </Header>
+            <Header></Header>
 
-            <div className="hero bg-base-300 min-h-screen" style={{backgroundImage: 'url(https://loremflickr.com/1280/720/stadium,landscape/all)'}}>
+            <div className="hero bg-base-300 min-h-screen" style={{ backgroundImage: 'url(https://loremflickr.com/1280/720/paris,landscape/all)' }}>
                 <div className="hero-overlay opacity-80 min-h-[70vh] max-w-fit-content"></div>
                 <div className="hero-content">
                     <h2 className='text-neutral-content font-bold text-xl text-center'>The Best eCommerce Available</h2>

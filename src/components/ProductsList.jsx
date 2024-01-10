@@ -1,7 +1,6 @@
 import React from 'react'
 import Product from './Product.jsx'
 import { atom, useRecoilState } from 'recoil'
-import { supabase } from '../supabaseClient.js'
 import { useEffect } from 'react'
 import { getProducts } from '../utils.js'
 
@@ -30,6 +29,7 @@ function ProductsList() {
         products.map((product) => {
           return <Product key={product.id} product={product} />
         })
+        
       }
     </div>
   )

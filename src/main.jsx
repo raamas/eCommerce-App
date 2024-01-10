@@ -19,6 +19,7 @@ import Dashboard from './routes/dashboard/Dashboard.jsx'
 import UpdateProduct from './components/UpdateProduct.jsx'
 import { loader as updateProductLoader } from './components/UpdateProduct.jsx'
 import Success from './routes/Success.jsx'
+import Error from './routes/Error.jsx'
 
 
 const router = createBrowserRouter([
@@ -27,35 +28,34 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       {
-        index:true,
+        index: true,
         element: <Home />
-      },{
-        path:'/signup',
+      }, {
+        path: '/signup',
         element: <Signup />
-      },      {
+      }, {
         path: '/login',
         element: <Login />
       }, {
         path: '/checkout',
         element: <Checkout />
-      },{
-        path:'/products/:productId',
+      }, {
+        path: '/products/:productId',
         element: <ProductPage />,
         loader: productLoader
-      },{
-        path:'/products/:productId/edit',
+      }, {
+        path: '/products/:productId/edit',
         element: <UpdateProduct />,
         loader: updateProductLoader
-      },
-      {
-        path:'/dashboard/login',
-        element: <DashboardLogin />
-      },{
-        path:'/dashboard',
+      }, {
+        path: '/dashboard',
         element: <Dashboard />
-      },{
+      }, {
         path: '/success',
         element: <Success />
+      }, {
+        path: '/error',
+        element: <Error />
       }
     ]
   },
