@@ -76,21 +76,21 @@ function CreateProduct() {
     }
 
     return (
-        <form className='flex flex-col items-center justify-center my-8' onSubmit={handleCreateProduct}>
-            <h1 className='text-lg font-semibold'>Añadir producto</h1>
+        <form className='card card-bordered p-4 flex flex-col items-center justify-center my-8 bg-base-200 border-base-300 max-w-sm' onSubmit={handleCreateProduct}>
+            <h1 className='card-title text-xl font-semibold'>Añadir producto</h1>
             <p className='my-2 text-success-content'>{uploadMessage}</p>
 
             <label className='my-4 font-semibold'>Imagen del producto</label>
-            <input type="file" name="productImage" id="productImage" className='productImage' onChange={uploadImage} />
+            <input type="file" name="productImage" id="productImage" className='productImage file-input file-input-bordered file-input-primary w-full max-w-xs' onChange={uploadImage} />
 
             <label className='mt-2 font-semibold'>Titulo del producto</label>
-            <input type="text" className='input input-primary m-2 w-full' required placeholder='Escribe el titulo de tu producto' name='productTitle' id='productTitle' value={query.productTitle} onChange={(e) => setQuery({ ...query, productTitle: e.target.value })} />
+            <input type="text" className='input input-primary m-2 w-full ' required placeholder='Escribe el titulo de tu producto' name='productTitle' id='productTitle' value={query.productTitle} onChange={(e) => setQuery({ ...query, productTitle: e.target.value })} />
 
             <label className='mt-2 font-semibold'>Precio del producto</label>
-            <input type="number" className='input input-primary m-2 w-full' required placeholder='Escribe el precio de tu producto' name='productPrice' id='productPrice' value={query.productPrice} onChange={(e) => setQuery({ ...query, productPrice: e.target.value })} />
+            <input type="number" className='input input-primary m-2 w-full ' required placeholder='Escribe el precio de tu producto' name='productPrice' id='productPrice' value={query.productPrice} onChange={(e) => setQuery({ ...query, productPrice: e.target.value })} />
 
             <label className='mt-2 font-semibold'>Descripción del producto</label>
-            <input type="text" className='input input-primary m-2 w-full' required placeholder='Escribe una descripción para tu producto' name='productDescription' id='productDescription' value={query.productDescription} onChange={(e) => setQuery({ ...query, productDescription: e.target.value })} />
+            <input type="text" className='input input-primary m-2 w-full ' required placeholder='Escribe una descripción para tu producto' name='productDescription' id='productDescription' value={query.productDescription} onChange={(e) => setQuery({ ...query, productDescription: e.target.value })} />
 
             <button className='btn btn-primary w-full m-2'>Crear</button>
         </form>

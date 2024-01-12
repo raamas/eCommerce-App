@@ -32,19 +32,19 @@ function Product({product}) {
     }
 
     return (
-        <div className="card card-compact bg-base-200 border border-base-300 mb-4 w-full">
-            <div className="card-body flex flex-col ">
+        <div className="card card-compact bg-base-200 border border-base-300 mb-4 w-full mx-2 md:min-w-xl ">
+            <div className="card-body flex flex-col items-center justify-center md:flex-row">
                 <h2 className="card-title"> <Link to={'/products/' + product.id} >{product.title}</Link> </h2>
                 <p>Precio: ${product.price.toLocaleString()}</p>
                 <p>Calificación: {grade.toFixed(1)}</p>
-                <div className="card-actions w-full items-center justify-center m-2">
-                    <button className="btn btn-error w-2/5" onClick={() => deleteProduct(product.id)}>Eliminar Producto</button>
-                    <button className="btn btn-info w-2/5"  > <Link to={`/products/${product.id}/edit`} >Editar Producto</Link> </button>
+                <div className="card-actions w-full items-center justify-center m-2 md:justify-end">
+                    <button className="btn btn-error w-full md:w-48 lg:w-48" onClick={() => deleteProduct(product.id)}>Eliminar Producto</button>
+                    <button className="btn btn-info w-full md:w-48 lg:w-48"  > <Link to={`/products/${product.id}/edit`} >Editar Producto</Link> </button>
                 </div>
             </div>
 
         </div>
     )
 }
-
+ 
 export default Product

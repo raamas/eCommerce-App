@@ -50,7 +50,7 @@ function AddReview({ productId }) {
                 <div className="review flex items-center justify-center flex-col">
                     <p className='mb-2'>Deja tu calificación:</p>
                     <Rating value={rating} onChange={setRating} style={{ maxWidth: '20em', maxHeight: '3em', }} itemStyles={ratingStyle} />
-                    <button onClick={handleReview} className='btn btn-accent w-full my-2'>Enviar calificación</button>
+                    <button onClick={handleReview} className='btn btn-secondary w-full my-2'>Enviar calificación</button>
                     <p className="text-success">{successMessage}</p>
                 </div>
                 : <p>Inicia sesión para dejarnos tu  calificación de este producto</p>

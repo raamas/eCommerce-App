@@ -47,7 +47,7 @@ function Signup() {
     return (
         <div className='flex flex-col justify-center items-center w-full h-screen '>
             {(loading) ? <span className="loading loading-spinner loading-lg"></span>
-                : <form className="form flex flex-col justify-center items-center w-4/5 p-4 rounded-lg bg-base-200 border border-base-300" onSubmit={signupHandler}>
+                : <form className="form flex flex-col justify-center items-center w-4/5 p-4 rounded-lg bg-base-200 border border-base-300 max-w-sm" onSubmit={signupHandler}>
                     <h2 className='text-lg font-semibold my-6'>Crea una cuenta</h2>
 
                     <input className='input input-bordered input-primary mb-2 w-full focus:invalid:input-error' required type="text" name="fullname" id="fullname" placeholder='Escribe tu nombre completo' value={query.fullname} onChange={(e) => setQuery({ ...query, fullname: e.target.value })} />

@@ -12,17 +12,19 @@ export const shoppingCartState = atom({
 function Home() {
 
     return (
-        <div className='flex flex-col items-center justify-center'>
+        <div className='flex flex-col items-center justify-center transition transition-all'>
             <Header></Header>
 
-            <div className="hero bg-base-300 min-h-screen" style={{ backgroundImage: 'url(https://loremflickr.com/1280/720/paris,landscape/all)' }}>
-                <div className="hero-overlay opacity-80 min-h-[70vh] max-w-fit-content"></div>
+            <div className="hero bg-base-300 min-h-screen" style={{ backgroundImage: 'url(https://loremflickr.com/1280/720/dark/all)' }}>
+                <div className="hero-overlay opacity-95 min-h-[70vh] max-w-fit-content"></div>
                 <div className="hero-content">
-                    <h2 className='text-neutral-content font-bold text-xl text-center'>The Best eCommerce Available</h2>
+                    <span className="bg-clip-text bg-gradient-to-l from-primary to-secondary">
+                        <h2 className='text-transparent font-extrabold text-3xl text-center '>The Best eCommerce Available</h2>
+                    </span>
                 </div>
             </div>
 
-            <div className="content w-4/5 flex flex-col items-center justify-center mt-4">
+            <div className="content w-4/5 flex flex-col items-center justify-center my-4">
                 <ProductsList />
             </div>
         </div>

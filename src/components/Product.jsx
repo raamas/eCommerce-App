@@ -11,10 +11,10 @@ function Product({ product }) {
 
 
     return (
-        <div className="card card-bordered border-base-300 bg-base-200 m-2 w-full">
+        <div className="card card-bordered border-base-300 bg-base-200 m-2 w-full shadow shadow-sm max-w-xs ">
             <div className="card-body">
                 <figure> <img src={product.image} alt={product.title} className='min-w-full' /> </figure>
-                <h3 className="card-title"> <Link to={'/products/' + product.id} >{product.title}</Link> </h3>
+                <h3 className="card-title font-semibold text-primary"> <Link to={'/products/' + product.id} >{product.title}</Link> </h3>
                 <p>${product.price.toLocaleString()}</p>
                 <p className='mb-2'>Calificación: {grade.toFixed(1)} ({product.ratings.length})</p>
                 {(user.id) &&

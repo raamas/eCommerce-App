@@ -21,7 +21,7 @@ function ProductListDashboard() {
 
 
     return (
-        <div className='flex flex-row items-center justify-center flex-wrap '>
+        <div className='flex flex-row items-center justify-start flex-wrap '>
             {(products) &&
                 products.map((product) => {
                     return (
@@ -33,4 +33,4 @@ function ProductListDashboard() {
     )
 }
 
-export default ProductListDashboard
+export default ProductListDashboard 

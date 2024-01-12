@@ -31,10 +31,10 @@ function ProductPage() {
 
       <Header></Header>
       <main className='flex flex-col items-center justify-center h-full'>
-        <div className="card bg-base-300 w-4/5 my-8">
+        <div className="card bg-base-200 border border-base-300 w-4/5 my-8 max-w-md ">
           <div className="card-body">
             <figure><img src={product.image} alt={product.title} /></figure>
-            <div className="card-title mb-2">
+            <div className="card-title mb-2 text-2xl text-extrabold">
               {product.title}
             </div>
 

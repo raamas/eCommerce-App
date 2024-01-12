@@ -10,8 +10,8 @@ function Header({ children }) {
     const cart = useRecoilValue(shoppingCartState)
     const user = useRecoilValue(userState)
     return (
-        <div className="navbar flex flex-row justify-around w-full bg-base-200 min-h-6">
-            <h1> <Link to='/' >eCommerce App</Link> </h1>
+        <div className="navbar flex flex-row justify-around w-full bg-base-100/95 backdrop-blur-sm border border-base-200 min-h-6 sticky top-0 z-20">
+            <h1 className='text-sm font-bold text-primary'  > <Link to='/' >eCommerce App</Link> </h1>
             <div>
                 {/* <a href="#" className='mx-1'> <FaMagnifyingGlass /> </a> */}
 
@@ -23,7 +23,7 @@ function Header({ children }) {
                         </div>
 
                         {(user.user_metadata.admin) &&
-                            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 my-4">
                                 <li> <Link to='/dashboard'>Panel de control</Link> </li>
                             </ul>
                         }

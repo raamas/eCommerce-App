@@ -101,11 +101,12 @@ function UpdateProduct() {
     }
 
     return (
-        <div className='flex flex-col items-center justify-center'>
-            <main className=' flex flex-col items-center justify-center'>
+        <div className='flex flex-col items-center justify-center min-h-screen min-w-full'>
+            <main className=' flex flex-col items-center justify-center w-full'>
                 
-                <div className='flex flex-col items-center justify-center my-8'>
-                    <h1 className='text-lg font-semibold'>Editar producto</h1>
+                <div className='card card-bordered border-base-300 bg-base-200 p-8 flex flex-col items-center justify-center my-8 w-3/5 shadow shadow-sm max-w-md'>
+                    <h1 className='text-lg font-semibold text-primary'>Editar producto</h1>
+
                     <p className='my-2 text-success-content'>{updateMessage}</p>
 
                     <label className='mt-2 font-semibold'>Titulo del producto</label>

@@ -16,7 +16,7 @@ function AddToCart({product, className}) {
     <>
     {user.id 
     ?<button className='btn w-full mt-2 btn-primary' onClick={(e) => addProductToCart(e)} > Añadir al carrito </button>
-    :<button className='btn btn-disabled btn-secondary w-full mt-2' onClick={(e) => addProductToCart(e)} > Añadir al carrito </button>
+    :<button className='btn btn-disabled btn-primary w-full mt-2' onClick={(e) => addProductToCart(e)} > Añadir al carrito </button>
     }
     </>
   )
