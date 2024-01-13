@@ -47,7 +47,8 @@ function CreateProduct() {
         }
     }
 
-    const handleCreateProduct = async () => {
+    const handleCreateProduct = async (e) => {
+        e.preventDefault()
         let res = await supabase
             .from('products')
             .insert({
@@ -92,7 +93,7 @@ function CreateProduct() {
             <label className='mt-2 font-semibold'>Descripción del producto</label>
             <input type="text" className='input input-primary m-2 w-full ' required placeholder='Escribe una descripción para tu producto' name='productDescription' id='productDescription' value={query.productDescription} onChange={(e) => setQuery({ ...query, productDescription: e.target.value })} />
 
-            <button className='btn btn-primary w-full m-2'>Crear</button>
+            <button type='submit' className='btn btn-primary w-full m-2'>Crear</button>
         </form>
     )
 }
