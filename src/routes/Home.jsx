@@ -19,7 +19,7 @@ function Home() {
                 <div className="hero-overlay opacity-95 min-h-[70vh] max-w-fit-content"></div>
                 <div className="hero-content">
                     <span className="bg-clip-text bg-gradient-to-l from-primary to-secondary">
-                        <h2 className='text-transparent font-extrabold text-3xl text-center '>The Best eCommerce Available</h2>
+                        <h2 className='text-transparent font-extrabold text-3xl text-center '>Las mejores camisetas de futból en la internet</h2>
                     </span>
                 </div>
             </div>
