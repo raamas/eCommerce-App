@@ -13,14 +13,21 @@ export const getProducts = async () => {
     return data
 }
 
-// export const getOrders = async () => {
-//     let { data, error } = await supabase
-//     .auth()
-//     .admin
+export const getAllOrders = async () => {
+    let { data, error } = await supabase
+    .from('orders')
+    .select(`
+    id,
+    buyerId,
+    notes:orderNotes,
+    products(id, title, price)
+    `)
+    // .eq('isFulfilled', false)
 
-//     if (!data) {
-//         console.log(error)
-//     }
 
-//     return data
-// }
+    if (!data) {
+        console.log(error)
+    }
+
+    return data
+}

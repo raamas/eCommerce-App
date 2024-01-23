@@ -1,51 +1,39 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import DashboardProductList from '../../components/dashboard/ProductList.jsx'
-import CreateProduct from '../../components/CreateProduct.jsx'
-import { useRecoilValue } from 'recoil'
-import { userState } from '../Login.jsx'
-import Header from '../../components/Header.jsx'
-// import DashboardOrdersList from '../../components/dashboard/OrdersList.jsx'
-
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { userState } from "../Login.jsx";
+import Header from "../../components/Header.jsx";
+import { Outlet } from "react-router-dom";
 
 function Dashboard() {
-  const [showProductForm, setShowProductForm] = useState()
-  const user = useRecoilValue(userState)
-  const navigate = useNavigate()
+  let user = useRecoilValue(userState);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // console.log()
     if (user?.user_metadata?.admin != "true") {
-      navigate('/')
+      navigate("/");
     }
-  }, [user])
+  }, [user]);
+
+  console.log(window.location.href)
 
   return (
     <div>
       <Header />
-      <h1 className='m-4 text-xl font-bold text-center'>Dashboard</h1>
+      <h1 className="m-4 text-xl font-bold text-center">Dashboard</h1>
 
-      <main className='flex flex-col items-center justify-center mb-4'>
-        <div className="products w-4/5 max-w-4xl">
-          <h2 className="text-lg m-4">Productos</h2>
+      <div className="w-full flex flex-row items-center justify-center ">
+      <div className="join">
+        <button className="btn join-item w-36" id="productsBtn" onClick={()=>navigate('/dashboard/products')}>Products</button>
+        <button className="btn join-item w-36" id="ordersBtn" onClick={()=>navigate('/dashboard/orders')}>Orders</button>
+      </div>
+      </div>
 
-          <div className="flex items-center justify-center">
-            <DashboardProductList />
-          </div>
-
-          <div className="flex flex-col items-center justify-center">
-            <button className='btn btn-primary w-full' onClick={() => setShowProductForm(true)}>Añadir producto nuevo</button>
-            {showProductForm && <CreateProduct />}
-          </div>
-        </div>
-
-
-        <h2 className='text-lg my-4'>Ordenes</h2>
-        <p>En construcción</p>
-        {/* <DashboardOrdersList /> */}
+      <main className="flex flex-col items-center justify-center mb-4">
+        <Outlet />
       </main>
     </div>
-  )
+  );
 }
 
-export default Dashboard 
+export default Dashboard;
