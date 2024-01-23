@@ -53,23 +53,25 @@ function Checkout() {
 
     try {
       for (let item of cart) {
-        let { data: productOrderRelation, error } = await supabase
-          .from("products_orders")
-          .insert({
-            orderId: newOrder.id,
-            productId: item.id,
-          })
-          .select();
+        setTimeout(async () => {
+          let { data: productOrderRelation, error } = await supabase
+            .from("products_orders")
+            .insert({
+              orderId: newOrder.id,
+              productId: item.id,
+            })
+            .select();
 
-        console.log(productOrderRelation);
-        if (error) throw new Error(error);
+          console.log(productOrderRelation);
+          if (error) throw new Error(error);
+        }, 1200);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       let deleteOrder = await supabase
-      .from('orders')
-      .delete()
-      .eq('id', newOrder.id)
+        .from("orders")
+        .delete()
+        .eq("id", newOrder.id);
     }
   };
 
