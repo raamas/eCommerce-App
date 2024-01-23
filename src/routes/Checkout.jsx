@@ -32,7 +32,7 @@ function Checkout() {
 
   const handleCheckout = async () => {
     try {
-      let {data: newOrder, error} = await supabase
+      let { data: newOrder, error } = await supabase
         .from("orders")
         .insert({
           buyerId: user.id,
@@ -40,28 +40,30 @@ function Checkout() {
         })
         .select()
         .single();
-      
-        if(error) throw new Error(error)
-        
-        console.log(newOrder);
 
-        for (let item of cart) {
-          let createProductOrderRelations = await supabase
-            .from("products_orders")
-            .insert({
-              orderId: newOrder.id,
-              productId: item.id,
-            })
-            .select();
+      if (error) throw new Error(error);
 
-          console.log(createProductOrderRelations);
-        }
+      console.log(newOrder);
 
+      for (let item of cart) {
+        let { data: productOrderRelation, error } = await supabase
+          .from("products_orders")
+          .insert({
+            orderId: newOrder.id,
+            productId: item.id,
+          })
+          .select();
+
+        console.log(productOrderRelation);
+        if (error) throw new Error(error);
+      }
+
+      navigate('/success')
+      setCart([]);
     } catch (error) {
       navigate("/error");
     }
 
-    setCart([]);
   };
 
   return (
