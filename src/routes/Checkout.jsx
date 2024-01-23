@@ -42,9 +42,16 @@ function Checkout() {
         .single();
 
       if (error) throw new Error(error);
-
       console.log(newOrder);
 
+      // navigate('/success')
+      // setCart([]);
+    } catch (error) {
+      console.log(error);
+      navigate("/error");
+    }
+
+    try {
       for (let item of cart) {
         let { data: productOrderRelation, error } = await supabase
           .from("products_orders")
@@ -57,13 +64,13 @@ function Checkout() {
         console.log(productOrderRelation);
         if (error) throw new Error(error);
       }
-
-      navigate('/success')
-      setCart([]);
     } catch (error) {
-      navigate("/error");
+      console.log(error)
+      let deleteOrder = await supabase
+      .from('orders')
+      .delete()
+      .eq('id', newOrder.id)
     }
-
   };
 
   return (
