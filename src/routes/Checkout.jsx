@@ -5,6 +5,7 @@ import Header from "../components/Header.jsx";
 import { supabase } from "../supabaseClient.js";
 import { userState } from "./Login.jsx";
 import { useNavigate } from "react-router-dom";
+import { v4 } from "uuid";
 
 function Checkout() {
   const [cart, setCart] = useRecoilState(shoppingCartState);
@@ -22,7 +23,6 @@ function Checkout() {
 
   const handleNotes = async (e) => {
     // document.getElementById('my_modal_1').closeModal()
-    console.log(document.getElementById("my_modal_1"));
     setLoading(true);
     e.preventDefault();
     console.log(notes);
@@ -31,47 +31,32 @@ function Checkout() {
   };
 
   const handleCheckout = async () => {
+    let productsIds = cart.map((item) => {
+      return item.id;
+    });
+
+    console.log(productsIds)
+
     try {
       let { data: newOrder, error } = await supabase
         .from("orders")
         .insert({
           buyerId: user.id,
           orderNotes: notes,
+          products: productsIds
         })
         .select()
         .single();
 
-      if (error) throw new Error(error);
+      if (error) throw new error();
       console.log(newOrder);
 
-      // navigate('/success')
-      // setCart([]);
+      navigate("/success");
+      setCart([]);
+
     } catch (error) {
       console.log(error);
       navigate("/error");
-    }
-
-    try {
-      for (let item of cart) {
-        setTimeout(async () => {
-          let { data: productOrderRelation, error } = await supabase
-            .from("products_orders")
-            .insert({
-              orderId: newOrder.id,
-              productId: item.id,
-            })
-            .select();
-
-          console.log(productOrderRelation);
-          if (error) throw new Error(error);
-        }, 1200);
-      }
-    } catch (error) {
-      console.log(error);
-      let deleteOrder = await supabase
-        .from("orders")
-        .delete()
-        .eq("id", newOrder.id);
     }
   };
 
@@ -95,7 +80,7 @@ function Checkout() {
                   {cart.map((product) => {
                     return (
                       <div
-                        key={product.id}
+                        key={v4()}
                         className="card card-compact card-bordered w-full mb-4 "
                       >
                         <div className="card-body text-center items-center ">
@@ -126,7 +111,6 @@ function Checkout() {
               Total: ${Math.ceil(cartTotal / 0.9).toLocaleString()}
             </p>
 
-            {/* <button className="btn btn-primary" onClick={handleCheckout}>Comprar</button> */}
             <button
               className="btn btn-primary"
               onClick={() => document.getElementById("my_modal_5").showModal()}
@@ -162,10 +146,6 @@ function Checkout() {
                     Ingresar
                   </button>
                 </form>
-                {/* <div className="modal-action w-full">
-    
-    
-                </div> */}
               </div>
             </dialog>
           </div>

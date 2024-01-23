@@ -1,7 +1,7 @@
 import React from 'react'
 import { atom, useRecoilState } from 'recoil'
 import { useEffect } from 'react'
-import { getAllOrders } from '../../utils.js'
+import { getOrders } from '../../utils.js'
 import Order from './Order.jsx'
 
 const ordersState = atom({
@@ -14,7 +14,7 @@ function DashboardOrdersList() {
 
     useEffect(() => {
         let invokeGetOrders = async () => {
-            let data = await getAllOrders()
+            let data = await getOrders()
             setOrders(data)
         }
 
